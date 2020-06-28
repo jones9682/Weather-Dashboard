@@ -1,2 +1,2 @@
 # Weather-Dashboard
-wk-6-hw
+week-6-hw
