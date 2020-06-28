@@ -1,0 +1,9 @@
+#navText {
+  color: rgb(15, 194, 194);
+}
+body {
+  background: url(../Weather-Dashboard/assets/images/blue-sky.jpg);
+}
+#subBtn {
+  color: rgb(100, 255, 80);
+}
