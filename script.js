@@ -1,3 +1,5 @@
+var APIKey = "940e51422e694402b09f44884b4904e9";
+
 $("#subBtn").on("click", function () {
   /*
     1. use jquery to grab value of input, which is the city, and set that equal to a variable
@@ -6,8 +8,6 @@ $("#subBtn").on("click", function () {
   */
   var cityInput = $("#city").val();
   console.log(cityInput);
-
-  var APIKey = "940e51422e694402b09f44884b4904e9";
 
   // URL needed to query the database
   var queryURL =
@@ -42,5 +42,16 @@ $("#subBtn").on("click", function () {
       console.log("Wind Speed: " + response.wind.speed);
       console.log("Humidity: " + response.main.humidity);
       console.log("Temperature (F): " + tempF);
+      getUvIndex(response.coord.lat, response.coord.lon);
     });
 });
+function getUvIndex(lat, long) {
+  var queryURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${APIKey}`;
+
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response);
+  });
+}
