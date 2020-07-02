@@ -16,7 +16,7 @@ $("#subBtn").on("click", function () {
     cityInput +
     "&appid=" +
     APIKey;
-  console.log(queryURL);
+  // console.log(queryURL);
 
   // AJAX call to the OpenWeatherMap API
   $.ajax({
@@ -25,24 +25,22 @@ $("#subBtn").on("click", function () {
   })
     // store all of the retrieved data inside of an object
     .then(function (response) {
-      console.log(response);
-
-      // Transfer content to HTML
-      $(".city").html(response.name);
-      $(".wind").text("Wind Speed: " + response.wind.speed);
-      $(".humidity").text("Humidity: " + response.main.humidity);
 
       // Convert the temp to fahrenheit
       var tempF = (response.main.temp - 273.15) * 1.8 + 32;
 
-      // add temp content to html
-      $(".tempF").text("Temperature (F) " + tempF.toFixed(2));
+      // Transfer content to HTML
+      $("#city-name").text(response.name);
+      $("#tempF").text("Current Temp: " + tempF.toFixed(2) + " °F");
+      $("#wind").text("Wind Speed: " + response.wind.speed + " MPH");
+      $("#humidity").text("Humidity: " + response.main.humidity + " %");
 
       // Log the data in the console as well
       console.log("Wind Speed: " + response.wind.speed);
       console.log("Humidity: " + response.main.humidity);
-      console.log("Temperature (F): " + tempF);
+      console.log("Current Temp: " + tempF);
       getUvIndex(response.coord.lat, response.coord.lon);
+      console.log(response);
     });
 });
 function getUvIndex(lat, long) {
@@ -53,5 +51,8 @@ function getUvIndex(lat, long) {
     method: "GET",
   }).then(function (response) {
     console.log(response);
+
+    $("#uvIndex").text("UV Index: " + response.current.uvi);
+
   });
 }
